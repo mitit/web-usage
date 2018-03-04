@@ -18,8 +18,8 @@ public interface WebEventRepository extends JpaRepository<WebEvent, Long> {
     Integer countDistinctUsersByPeriod(Timestamp from, Timestamp to);
 
     @Query(value = "SELECT COUNT(*) FROM " +
-            "(SELECT user_id u, COUNT(DISTINCT url_path) pc FROM web_events " +
-            "WHERE date BETWEEN ?1 AND ?2 GROUP BY user_id) tmp " +
+            "(SELECT user_name u, COUNT(DISTINCT url_path) pc FROM web_events " +
+            "WHERE date BETWEEN ?1 AND ?2 GROUP BY user_name) tmp " +
             "WHERE tmp.pc > 10", nativeQuery = true)
     Integer countRegularUsersByPeriod(Timestamp from, Timestamp to);
 }

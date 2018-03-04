@@ -20,7 +20,7 @@ public class WebEventServiceImpl implements WebEventService {
     }
 
     @Override
-    public Integer getUserCountByPeriod(Long bt, Long et) {
+    public Integer getEventCountByPeriod(Long bt, Long et) {
         final Timestamp from = new Timestamp(bt);
         final Timestamp to = new Timestamp(et);
 
@@ -44,7 +44,7 @@ public class WebEventServiceImpl implements WebEventService {
     }
 
     @Override
-    public Integer getUserCountPerDay() {
+    public Integer getEventCountPerDay() {
         final LocalDateTime today = LocalDateTime.now();
 
         final Timestamp from = getTodayTimestampFrom(today);
@@ -65,7 +65,7 @@ public class WebEventServiceImpl implements WebEventService {
 
     private Timestamp getTodayTimestampTo(LocalDateTime today) {
         final LocalDateTime dateTo =
-                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 23, 59);
+                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 23, 59, 59);
         return Timestamp.valueOf(dateTo);
     }
 

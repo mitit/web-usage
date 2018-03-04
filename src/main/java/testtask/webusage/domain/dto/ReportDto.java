@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class ReportDto {
 
-    Integer userCount;
+    Integer eventCount;
     Integer uniqueUserCount;
     Integer regularUserCount;
 

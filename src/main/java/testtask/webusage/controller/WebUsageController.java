@@ -3,12 +3,8 @@ package testtask.webusage.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import testtask.webusage.controller.converter.WebEventConverter;
-import testtask.webusage.domain.Url;
-import testtask.webusage.domain.User;
 import testtask.webusage.domain.dto.ReportDto;
 import testtask.webusage.domain.dto.WebEventDto;
-import testtask.webusage.repository.UrlRepository;
-import testtask.webusage.repository.UserRepository;
 import testtask.webusage.service.WebEventService;
 
 @RestController
@@ -26,12 +22,12 @@ public class WebUsageController {
 
         webEventService.saveWebEvent(webEventConverter.createFromDto(eventDto));
 
-        final Integer userCountPerDay = webEventService.getUserCountPerDay();
+        final Integer eventCountPerDay = webEventService.getEventCountPerDay();
         final Integer uniqueUserCountPerDay = webEventService.getUniqueUserCountPerDay();
 
         return ReportDto
                 .builder()
-                .userCount(userCountPerDay)
+                .eventCount(eventCountPerDay)
                 .uniqueUserCount(uniqueUserCountPerDay)
                 .build();
     }
@@ -41,13 +37,13 @@ public class WebUsageController {
             @RequestParam(value = "begin-time") Long bt,
             @RequestParam(value = "end-time") Long et) {
 
-        final Integer userCountByPeriod = webEventService.getUserCountByPeriod(bt, et);
+        final Integer eventCountByPeriod = webEventService.getEventCountByPeriod(bt, et);
         final Integer uniqueUserCountByPeriod = webEventService.getUniqueUserCountByPeriod(bt, et);
         final Integer regularUserCountByPeriod = webEventService.getRegularUserCountByPeriod(bt, et);
 
         return ReportDto
                 .builder()
-                .userCount(userCountByPeriod)
+                .eventCount(eventCountByPeriod)
                 .uniqueUserCount(uniqueUserCountByPeriod)
                 .regularUserCount(regularUserCountByPeriod)
                 .build();
