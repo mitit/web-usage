@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 public class WebEventDto {
 
-    long userId;
+    String userName;
     String url;
     long date;
 

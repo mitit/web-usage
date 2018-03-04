@@ -3,6 +3,7 @@ package testtask.webusage.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import testtask.webusage.domain.WebEvent;
+import testtask.webusage.repository.WebEventRepository;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

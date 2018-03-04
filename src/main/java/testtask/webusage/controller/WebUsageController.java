@@ -3,14 +3,17 @@ package testtask.webusage.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import testtask.webusage.controller.converter.WebEventConverter;
+import testtask.webusage.domain.Url;
+import testtask.webusage.domain.User;
 import testtask.webusage.domain.dto.ReportDto;
 import testtask.webusage.domain.dto.WebEventDto;
+import testtask.webusage.repository.UrlRepository;
+import testtask.webusage.repository.UserRepository;
 import testtask.webusage.service.WebEventService;
 
 @RestController
 @RequestMapping("/api/1/web_event")
 public class WebUsageController {
-
 
     @Autowired
     private WebEventConverter webEventConverter;
@@ -20,6 +23,7 @@ public class WebUsageController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ReportDto createWebEvent(@RequestBody WebEventDto eventDto) {
+
         webEventService.saveWebEvent(webEventConverter.createFromDto(eventDto));
 
         final Integer userCountPerDay = webEventService.getUserCountPerDay();
