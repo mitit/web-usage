@@ -2,10 +2,8 @@ package testtask.webusage.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import testtask.webusage.controller.converter.WebEventConverter;
 import testtask.webusage.domain.WebEvent;
 
-import java.util.Date;
 import java.sql.Timestamp;
 
 @Service
@@ -21,12 +19,12 @@ public class WebEventServiceImpl implements WebEventService {
 
     @Override
     public Integer getUserCountWithPeriod(Timestamp from, Timestamp to) {
-        return null;
+        return webEventRepository.countByDateBetween(from, to);
     }
 
     @Override
     public Integer getUniqueUserCountWithPeriod(Timestamp from, Timestamp to) {
-        return null;
+        return webEventRepository.countDistinctUsers(from, to);
     }
 
     @Override
