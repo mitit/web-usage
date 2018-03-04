@@ -7,10 +7,7 @@ import testtask.webusage.domain.dto.ReportDto;
 import testtask.webusage.domain.dto.WebEventDto;
 import testtask.webusage.service.WebEventService;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -24,7 +21,7 @@ public class WebUsageController {
     @Autowired
     WebEventService webEventService;
 
-    @RequestMapping(path = "/create", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ReportDto createWebEvent(@RequestBody WebEventDto eventDto) {
         webEventService.saveWebEvent(webEventConverter.createFromDto(eventDto));
 
@@ -38,42 +35,42 @@ public class WebUsageController {
                 .build();
     }
 
-    @RequestMapping(path = "/report", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ReportDto getReport(
-            @RequestParam(value = "begin-time", required = false) Long bt,
-            @RequestParam(value = "end-time", required = false) Long et) {
+            @RequestParam(value = "begin-time") Long bt,
+            @RequestParam(value = "end-time") Long et) {
 
-        Integer userCountWithPeriod = getUserCountWithPeriod(bt, et);
-        Integer uniqueUserCountWithPeriod = getUniqueUserCountWithPeriod(bt, et);
-        Integer regularUserCountWithPeriod = getRegularUserCountWithPeriod(bt, et);
+        Integer userCountByPeriod = getUserCountByPeriod(bt, et);
+        Integer uniqueUserCountByPeriod = getUniqueUserCountByPeriod(bt, et);
+        Integer regularUserCountByPeriod = getRegularUserCountByPeriod(bt, et);
 
         return ReportDto
                 .builder()
-                .userCount(userCountWithPeriod)
-                .uniqueUserCount(uniqueUserCountWithPeriod)
-                .regularUserCount(regularUserCountWithPeriod)
+                .userCount(userCountByPeriod)
+                .uniqueUserCount(uniqueUserCountByPeriod)
+                .regularUserCount(regularUserCountByPeriod)
                 .build();
     }
 
-    private Integer getUserCountWithPeriod(Long bt, Long et) {
+    private Integer getUserCountByPeriod(Long bt, Long et) {
         Timestamp from = new Timestamp(bt);
         Timestamp to = new Timestamp(et);
 
-        return webEventService.getUserCountWithPeriod(from, to);
+        return webEventService.getUserCountByPeriod(from, to);
     }
 
-    private Integer getUniqueUserCountWithPeriod(Long bt, Long et) {
+    private Integer getUniqueUserCountByPeriod(Long bt, Long et) {
         Timestamp from = new Timestamp(bt);
         Timestamp to = new Timestamp(et);
 
-        return webEventService.getUniqueUserCountWithPeriod(from, to);
+        return webEventService.getUniqueUserCountByPeriod(from, to);
     }
 
-    private Integer getRegularUserCountWithPeriod(Long bt, Long et) {
+    private Integer getRegularUserCountByPeriod(Long bt, Long et) {
         Timestamp from = new Timestamp(bt);
         Timestamp to = new Timestamp(et);
 
-        return webEventService.getRegularUserCountWithPeriod(from, to);
+        return webEventService.getRegularUserCountByPeriod(from, to);
     }
 
     private Integer getUserCountPerDay() {
@@ -82,7 +79,7 @@ public class WebUsageController {
         Timestamp from = getTodayTimestampFrom(today);
         Timestamp to = getTodayTimestampTo(today);
 
-        return webEventService.getUserCountWithPeriod(from, to);
+        return webEventService.getUserCountByPeriod(from, to);
     }
 
     private Integer getUniqueUserCountPerDay() {
@@ -91,7 +88,7 @@ public class WebUsageController {
         Timestamp from = getTodayTimestampFrom(today);
         Timestamp to = getTodayTimestampTo(today);
 
-        return webEventService.getUniqueUserCountWithPeriod(from, to);
+        return webEventService.getUniqueUserCountByPeriod(from, to);
     }
 
     private Timestamp getTodayTimestampTo(LocalDateTime today) {

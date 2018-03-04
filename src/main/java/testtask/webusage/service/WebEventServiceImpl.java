@@ -18,17 +18,17 @@ public class WebEventServiceImpl implements WebEventService {
     }
 
     @Override
-    public Integer getUserCountWithPeriod(Timestamp from, Timestamp to) {
+    public Integer getUserCountByPeriod(Timestamp from, Timestamp to) {
         return webEventRepository.countByDateBetween(from, to);
     }
 
     @Override
-    public Integer getUniqueUserCountWithPeriod(Timestamp from, Timestamp to) {
-        return webEventRepository.countDistinctUsers(from, to);
+    public Integer getUniqueUserCountByPeriod(Timestamp from, Timestamp to) {
+        return webEventRepository.countDistinctUsersByPeriod(from, to);
     }
 
     @Override
-    public Integer getRegularUserCountWithPeriod(Timestamp from, Timestamp to) {
-        return webEventRepository.countRegularUsers(from, to);
+    public Integer getRegularUserCountByPeriod(Timestamp from, Timestamp to) {
+        return webEventRepository.countRegularUsersByPeriod(from, to);
     }
 }
