@@ -3,6 +3,7 @@ package testtask.webusage.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Setter
 @Getter
@@ -26,5 +27,8 @@ public class WebEvent {
     @ManyToOne
     @JoinColumn(name = "url_path", nullable = false)
     private Url url;
+
+    @Column(name = "date")
+    private Timestamp date;
 
 }

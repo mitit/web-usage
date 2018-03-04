@@ -9,12 +9,6 @@ public interface WebEventService {
 
     void saveWebEvent(WebEvent webEvent);
 
-    Integer getUserCount();
-
-    Integer getUniqueUserCount();
-
-    Integer getRegularUserCount();
-
     Integer getUserCountWithPeriod(Timestamp from, Timestamp to);
 
     Integer getUniqueUserCountWithPeriod(Timestamp from, Timestamp to);

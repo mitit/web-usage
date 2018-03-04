@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import testtask.webusage.controller.converter.WebEventConverter;
 import testtask.webusage.domain.WebEvent;
 
+import java.util.Date;
 import java.sql.Timestamp;
 
 @Service
@@ -16,21 +17,6 @@ public class WebEventServiceImpl implements WebEventService {
     @Override
     public void saveWebEvent(WebEvent webEvent) {
         webEventRepository.save(webEvent);
-    }
-
-    @Override
-    public Integer getUserCount() {
-        return (int) webEventRepository.count();
-    }
-
-    @Override
-    public Integer getUniqueUserCount() {
-        return null;
-    }
-
-    @Override
-    public Integer getRegularUserCount() {
-        return null;
     }
 
     @Override
