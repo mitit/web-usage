@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 public class WebEventServiceImpl implements WebEventService {
 
     @Autowired
-    WebEventRepository webEventRepository;
+    private WebEventRepository webEventRepository;
 
     @Override
     public void saveWebEvent(WebEvent webEvent) {

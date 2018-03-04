@@ -16,17 +16,17 @@ public class WebUsageController {
 
 
     @Autowired
-    WebEventConverter webEventConverter;
+    private WebEventConverter webEventConverter;
 
     @Autowired
-    WebEventService webEventService;
+    private WebEventService webEventService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ReportDto createWebEvent(@RequestBody WebEventDto eventDto) {
         webEventService.saveWebEvent(webEventConverter.createFromDto(eventDto));
 
-        Integer userCountPerDay = getUserCountPerDay();
-        Integer uniqueUserCountPerDay = getUniqueUserCountPerDay();
+        final Integer userCountPerDay = getUserCountPerDay();
+        final Integer uniqueUserCountPerDay = getUniqueUserCountPerDay();
 
         return ReportDto
                 .builder()
@@ -40,9 +40,9 @@ public class WebUsageController {
             @RequestParam(value = "begin-time") Long bt,
             @RequestParam(value = "end-time") Long et) {
 
-        Integer userCountByPeriod = getUserCountByPeriod(bt, et);
-        Integer uniqueUserCountByPeriod = getUniqueUserCountByPeriod(bt, et);
-        Integer regularUserCountByPeriod = getRegularUserCountByPeriod(bt, et);
+        final Integer userCountByPeriod = getUserCountByPeriod(bt, et);
+        final Integer uniqueUserCountByPeriod = getUniqueUserCountByPeriod(bt, et);
+        final Integer regularUserCountByPeriod = getRegularUserCountByPeriod(bt, et);
 
         return ReportDto
                 .builder()
@@ -53,52 +53,52 @@ public class WebUsageController {
     }
 
     private Integer getUserCountByPeriod(Long bt, Long et) {
-        Timestamp from = new Timestamp(bt);
-        Timestamp to = new Timestamp(et);
+        final Timestamp from = new Timestamp(bt);
+        final Timestamp to = new Timestamp(et);
 
         return webEventService.getUserCountByPeriod(from, to);
     }
 
     private Integer getUniqueUserCountByPeriod(Long bt, Long et) {
-        Timestamp from = new Timestamp(bt);
-        Timestamp to = new Timestamp(et);
+        final Timestamp from = new Timestamp(bt);
+        final Timestamp to = new Timestamp(et);
 
         return webEventService.getUniqueUserCountByPeriod(from, to);
     }
 
     private Integer getRegularUserCountByPeriod(Long bt, Long et) {
-        Timestamp from = new Timestamp(bt);
-        Timestamp to = new Timestamp(et);
+        final Timestamp from = new Timestamp(bt);
+        final Timestamp to = new Timestamp(et);
 
         return webEventService.getRegularUserCountByPeriod(from, to);
     }
 
     private Integer getUserCountPerDay() {
-        LocalDateTime today = LocalDateTime.now();
+        final LocalDateTime today = LocalDateTime.now();
 
-        Timestamp from = getTodayTimestampFrom(today);
-        Timestamp to = getTodayTimestampTo(today);
+        final Timestamp from = getTodayTimestampFrom(today);
+        final Timestamp to = getTodayTimestampTo(today);
 
         return webEventService.getUserCountByPeriod(from, to);
     }
 
     private Integer getUniqueUserCountPerDay() {
-        LocalDateTime today = LocalDateTime.now();
+        final LocalDateTime today = LocalDateTime.now();
 
-        Timestamp from = getTodayTimestampFrom(today);
-        Timestamp to = getTodayTimestampTo(today);
+        final Timestamp from = getTodayTimestampFrom(today);
+        final Timestamp to = getTodayTimestampTo(today);
 
         return webEventService.getUniqueUserCountByPeriod(from, to);
     }
 
     private Timestamp getTodayTimestampTo(LocalDateTime today) {
-        LocalDateTime dateTo =
+        final LocalDateTime dateTo =
                 LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 0, 0);
         return Timestamp.valueOf(dateTo);
     }
 
     private Timestamp getTodayTimestampFrom(LocalDateTime today) {
-        LocalDateTime dateFrom =
+        final LocalDateTime dateFrom =
                 LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 23, 59);
         return Timestamp.valueOf(dateFrom);
     }

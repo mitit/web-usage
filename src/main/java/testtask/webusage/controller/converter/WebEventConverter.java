@@ -12,11 +12,11 @@ import java.util.Random;
 public class WebEventConverter {
 
     public WebEvent createFromDto(WebEventDto dto) {
-        Url url = Url
+        final Url url = Url
                 .builder()
                 .path(dto.getUrl())
                 .build();
-        User user = User
+        final User user = User
                 .builder()
                 .id(dto.getUserId())
                 .build();
