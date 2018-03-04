@@ -2,15 +2,17 @@ package testtask.webusage.service;
 
 import testtask.webusage.domain.WebEvent;
 
-import java.sql.Timestamp;
-
 public interface WebEventService {
 
     void saveWebEvent(WebEvent webEvent);
 
-    Integer getUserCountByPeriod(Timestamp from, Timestamp to);
+    Integer getUserCountByPeriod(Long from, Long to);
 
-    Integer getUniqueUserCountByPeriod(Timestamp from, Timestamp to);
+    Integer getUniqueUserCountByPeriod(Long from, Long to);
 
-    Integer getRegularUserCountByPeriod(Timestamp from, Timestamp to);
+    Integer getRegularUserCountByPeriod(Long from, Long to);
+
+    Integer getUserCountPerDay();
+
+    Integer getUniqueUserCountPerDay();
 }
