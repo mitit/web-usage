@@ -29,6 +29,6 @@ public class WebEventServiceImpl implements WebEventService {
 
     @Override
     public Integer getRegularUserCountWithPeriod(Timestamp from, Timestamp to) {
-        return null;
+        return webEventRepository.countRegularUsers(from, to);
     }
 }
