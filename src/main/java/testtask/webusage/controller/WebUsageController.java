@@ -93,13 +93,13 @@ public class WebUsageController {
 
     private Timestamp getTodayTimestampTo(LocalDateTime today) {
         final LocalDateTime dateTo =
-                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 0, 0);
+                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 23, 59);
         return Timestamp.valueOf(dateTo);
     }
 
     private Timestamp getTodayTimestampFrom(LocalDateTime today) {
         final LocalDateTime dateFrom =
-                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 23, 59);
+                LocalDateTime.of(today.getYear(), today.getMonth(), today.getDayOfMonth(), 0, 0);
         return Timestamp.valueOf(dateFrom);
     }
 }

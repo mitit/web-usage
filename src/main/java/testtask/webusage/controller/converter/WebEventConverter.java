@@ -6,7 +6,7 @@ import testtask.webusage.domain.User;
 import testtask.webusage.domain.WebEvent;
 import testtask.webusage.domain.dto.WebEventDto;
 
-import java.util.Random;
+import java.sql.Timestamp;
 
 @Component
 public class WebEventConverter {
@@ -23,9 +23,9 @@ public class WebEventConverter {
 
         return WebEvent
                 .builder()
-                .id(new Random().nextLong())
                 .url(url)
                 .user(user)
+                .date(new Timestamp(dto.getDate()))
                 .build();
     }
 

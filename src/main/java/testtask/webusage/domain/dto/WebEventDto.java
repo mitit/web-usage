@@ -14,6 +14,6 @@ public class WebEventDto {
 
     long userId;
     String url;
-    Timestamp date;
+    long date;
 
 }
